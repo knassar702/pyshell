@@ -1,6 +1,7 @@
 #!/usr/bin/env python2
 import os, sys, subprocess,random,sqlite3
 from time import sleep
+# Color List if you need it :)
 class colors:
         def __init__(self):
                 self.green = "\033[92m"
