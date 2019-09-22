@@ -109,7 +109,7 @@ def main():
             		port = int(ask.split()[-1])
 			print("Port => {}").format(str(port))
 		except:
-			print(colored("[!] Error [!]","red"))
+			print('[-] Error ')
 			sleep(0.2)
 			main()
 	elif "set name" in ask:
