@@ -90,7 +90,6 @@ Simple Commands :
      elif ask[0:8] == 'netscan':
 		c.send("netscan")
 		clinet_dict = []
-		print('this may take time !!') ## note you should add all that in a fun but i'm too lazy ##Isla
 		sleep(1)
 		print("\n* IPs *\n-------")
 		while True:
