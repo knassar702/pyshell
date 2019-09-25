@@ -37,7 +37,7 @@ $ sudo apt install figlet
 
 ### Payload Requirements
 <ul>
-   <li>Pyshreenshot</li>
+   <li>Pyscreenshot</li>
    <li>Requests</li>
    <li>Nmap</li>
 </ul>
