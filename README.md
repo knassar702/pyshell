@@ -17,23 +17,13 @@
    <li>Take screenshot from victim device</li>
 </ul>
 
-### Requirements
-• Python 2.7 <br>
-• Figlet  <br>
-• Sqlite3
-### install Requirements (Linux)
-~~~~
-$ sudo apt install python
-~~~~
-~~~~
-$ sudo apt install python-pip
-~~~~
-~~~~
-$ sudo pip2 install sqlite3
-~~~~
-~~~~
-$ sudo apt install figlet
-~~~~
+
+# install Pyshell (Linux)
+````bash
+$ git clone https://github.com/khalednassar702/Pyshell
+$ cd Pyshell
+$ ./Pyshell
+````
 
 ### Payload Requirements
 <ul>
@@ -42,19 +32,8 @@ $ sudo apt install figlet
    <li>Nmap</li>
 </ul>
 
-# install Pyshell (Linux)
-````
-$ git clone https://github.com/khalednassar702/Pyshell
-````
-````
-$ cd Pyshell
-````
-````
-$ ./Pyshell
-````
-
 # install Payload Requirements
-````
+````bash
 $ sudo pip2 install pyscreenshot
 $ sudo pip2 install python-nmap
 $ sudo pip2 install requests
