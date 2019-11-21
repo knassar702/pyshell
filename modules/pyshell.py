@@ -175,6 +175,7 @@ def make_connection(host,port):
 			go=0
 		if go==1:
 			print ('[+] Connected .. \n\n')
+			print c.recv(1024)
 		 	while True:
 		     		ha = raw_input('>>>> ')
 		     		if ha[0:5] == 'mkdir':
